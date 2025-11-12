@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日快乐</title>
+    <meta charset="UTF-8" />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8bbd0, #ce93d8, #b39ddb);
+        background-size: 400% 400%;
+        animation: gradientShift 10s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+      }
+
+      .container {
+        position: relative;
+        width: 320px;
+        height: 320px;
+        animation: heartbeat 2.5s ease-in-out infinite alternate;
+        transform-origin: center;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1.1);
+        }
+      }
+
+      .photo {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2),
+          0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+        object-fit: cover;
+        transform: translate(-50%, -50%) rotate(0deg);
+        overflow: hidden;
+        opacity: 0;
+        animation: fadeInPhoto 0.6s forwards;
+        cursor: pointer;
+      }
+
+      @keyframes fadeInPhoto {
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) rotate(10deg);
+        }
+      }
+
+      /* 悬停标签 */
+      .photo-label {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .photo:hover .photo-label {
+        opacity: 1;
+      }
+
+      /* 中间文字 */
+      .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.8);
+        color: white;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6),
+          0 0 15px rgba(255, 255, 255, 0.4);
+        font-size: 40px;
+        font-weight: bold;
+        z-index: 10;
+        pointer-events: none;
+        white-space: nowrap;
+        letter-spacing: 3px;
+        animation: appearText 1.5s ease-out forwards;
+      }
+
+      @keyframes appearText {
+        to {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* 响应式：小屏幕适配 */
+      @media (max-width: 480px) {
+        .container {
+          width: 260px;
+          height: 260px;
+        }
+        .photo {
+          width: 50px;
+          height: 50px;
+        }
+        .center-text {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="heart">
+      <div class="center-text">生日快乐！</div>
+    </div>
+
+    <script>
+      // 爱心形状的参数方程
+      function heart(t) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(
+          13 * Math.cos(t) -
+          5 * Math.cos(2 * t) -
+          2 * Math.cos(3 * t) -
+          Math.cos(4 * t)
+        );
+        return { x, y };
+      }
+
+      const container = document.getElementById("heart");
+      const numPhotos = 40; // 照片数量
+      const scale = 19; // 放大比例
+      const centerX = 160; // 容器中心 X
+      const centerY = 160; // 容器中心 Y
+
+      // 图片数组（可以替换成你自己的图片）
+      const images = [
+        "https://i.imgs.ovh/2025/11/12/Cyukcn.jpeg",
+        "https://i.imgs.ovh/2025/11/12/CyuRG1.jpeg",
+        "https://i.imgs.ovh/2025/11/12/CyuAPb.jpeg",
+        "https://i.imgs.ovh/2025/11/12/CyuzLY.jpeg",
+        "https://i.imgs.ovh/2025/11/12/CyxgUX.jpeg",
+        "https://i.imgs.ovh/2025/11/12/Cyx8s9.jpeg",
+        "https://i.imgs.ovh/2025/11/12/Cyxl4M.jpeg",
+        "https://i.imgs.ovh/2025/11/12/Cyxmvt.jpeg",
+        "https://i.imgs.ovh/2025/11/12/Cyxmvt.jpeg",
+        // 可以添加更多图片
+      ];
+
+      for (let i = 0; i < numPhotos; i++) {
+        const t = (i / numPhotos) * 2 * Math.PI;
+        const point = heart(t);
+
+        const img = document.createElement("img");
+        img.className = "photo";
+
+        // 随机选择一张图片
+        const randomImage = images[Math.floor(Math.random() * images.length)];
+        img.src = randomImage;
+
+        // 设置位置
+        img.style.left = `${centerX + point.x * scale}px`;
+        img.style.top = `${centerY + point.y * scale}px`;
+
+        container.appendChild(img);
+      }
+    </script>
+  </body>
+</html>
