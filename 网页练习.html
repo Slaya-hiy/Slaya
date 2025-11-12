@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>试着写网站</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: rgb(169, 173, 211);
+      }
+      /* * {
+        border: 1px solid black;
+      } */
+      .flex {
+        display: flex;
+      }
+      .baise {
+        background-color: white;
+      }
+      .column {
+        flex-direction: column;
+      }
+      .flex1 {
+        flex: 1;
+      }
+      .mg8 {
+        margin: 8px;
+      }
+      .mgr8 {
+        margin-right: 8px;
+      }
+      .y {
+        box-shadow: 0 4px 12px rgba(163, 53, 60, 0.15);
+      }
+    </style>
+  </head>
+
+  <body style="" class="flex">
+    <!--侧边栏-->
+    <div style="width: 200px; z-index: 2" class="baise mgr8 y"></div>
+    <!--主区域-->
+    <div class="flex1 flex column">
+      <!--头部栏-->
+      <div class="baise mg8 y" style="height: 80px; z-index: 1"></div>
+      <!--内容区-->
+      <div class="flex" style="overflow: auto">
+        <!--左边-->
+        <div style="flex: 3">
+          <!--小栏-->
+          <div class="flex">
+            <div style="height: 100px" class="flex1 baise mg8 y"></div>
+            <div style="height: 100px" class="flex1 baise mg8 y"></div>
+            <div style="height: 100px" class="flex1 baise mg8 y"></div>
+            <div style="height: 100px" class="flex1 baise mg8 y"></div>
+          </div>
+          <div class="flex column">
+            <div style="height: 150px" class="baise mg8 y"></div>
+            <div style="height: 150px" class="baise mg8 y"></div>
+            <div style="height: 150px" class="baise mg8 y"></div>
+            <div style="height: 150px" class="baise mg8 y"></div>
+          </div>
+        </div>
+        <!--右边-->
+        <div class="column flex1">
+          <div class="baise mg8 y" style="height: 200px"></div>
+          <div class="baise mg8 y" style="height: 200px"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
